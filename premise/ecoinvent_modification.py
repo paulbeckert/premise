@@ -1029,16 +1029,10 @@ class NewDatabase:
         else:
             filepath = DATA_DIR / "export" / "scenario diff files"
 
-        # FIXME: REVIEW Why do we use two libraries for path operations here? Can we switch to pathlib completely here
-        #        by refering to filepath.exists() and filepath.mkdir(parents=True, exists_ok=True) calls?
-        if not os.path.exists(filepath):
-            os.makedirs(filepath)
+        filepath.mkdir(parents=True, exists_ok=True)
 
         if name is None:
-            # FIXME: REVIEW I am unsure if we are running into a date localization problem here.
-            #        string casting date.today() can result into implicit date formatting that result on us computers in 1/2/2020 like strings.
-            #        This can mess with filenames, thus I recommend we think about explicitly formatting it in ISO form.
-            name = f"super_db_{self.version}_{date.today()}"
+            name = f"super_db_{self.version}_{date.today().isoformat()}"
 
         filepath = filepath / f"{name}.xlsx"
 

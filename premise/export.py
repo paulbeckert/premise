@@ -16,8 +16,6 @@ def export_scenario_difference_file(database, db_name, filepath):
 
     scenario_cols = [t for t in database.columns if t[1] == c.amount and t[0] != s.ecoinvent]
 
-    # FIXME: REVIEW I have a suggestion for reformulating this code line into a better readable one.
-    #        With the code below it is in my opinion more readable for understanding the filterstatement created.
     invalid_data_rows = database[scenario_cols].isnull().all(1)
     database = database.loc[~invalid_data_rows]
 
@@ -71,7 +69,8 @@ def export_scenario_difference_file(database, db_name, filepath):
     #        Is it guaranteed that the order of df_vals rows is the same as the order of df_exp at the
     #        time we concatenate? If the sort order changes we would match lines which don't belong together
     #        We could either sort both datasets first or we could switch do an index based approach.
-    pd.concat(
+
+    ret = pd.concat(
         [
             df_exp[
                 [
@@ -93,13 +92,13 @@ def export_scenario_difference_file(database, db_name, filepath):
             df_vals,
         ],
         axis=1,
-    ).to_excel(filepath, index=False)
+    )
+
+    ret.to_excel(filepath, index=False)
 
     print(f"Scenario difference file exported to {filepath}!")
 
-    # FIXME: REVIEW Why do we not return the created dataset? It would be convenient to be able to access
-    #        the result of the function directly. For example if one wants to call the function with a copy like this:
-    #        export_scenario_difference_file(database.copy(), 'test', './path/2/data')
+    return ret
 
 
 def create_index_of_A_matrix(db):
