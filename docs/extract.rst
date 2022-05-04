@@ -1789,7 +1789,7 @@ conditions by the Fraunhofer_ Institute. In other words, it is assumed that by 2
 solar PVs will reach production level efficiencies equal to those observed today
 in laboratories.
 
-.. _Fraunhofer: https://www.ise.fraunhofer.de/content/dam/ise/de/documents/publications/studies/Photovoltaics-Report.pdff
+.. _Fraunhofer: https://www.ise.fraunhofer.de/content/dam/ise/de/documents/publications/studies/Photovoltaics-Report.pdf
 
  ====================== =========== ============ =========== ======= ====== =======
   % module efficiency    micro-Si    single-Si    multi-Si    CIGS    CIS    CdTe
